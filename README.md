@@ -1,74 +1,81 @@
 # PWR
-This repository contains an auto-update script for PWR Validator nodes. The script automatically checks for new releases of the PWR-Validator on GitHub and updates your validator when a new version is available.
-# Disclaimer
-This is an unofficial community tool. Use at your own risk.
+This repository contains an advanced auto-update script for PWR Validator nodes. The script checks for new releases of the PWR-Validator on GitHub and updates your validator when a new version is available.
+# Features
+- 🕰️ Watch mode - Continuously monitor for updates and wait until a new version is available
+- 🌐 Automatic IP detection - Detects your server's IP address automatically
+- 📈 Configurable check intervals - Set custom time intervals for update checks
+- 📝 Detailed logging - Complete log of all activities with timestamps
+- 🔄 Skip if latest version - Only updates when a new version is actually available
+- 🔒 Preconfigured password - Uses a fixed password for validation
 
-## Features
-- 🔄 Automatic hourly checks for new releases
-- 🖥️ Automatic IP detection using curl -s ipinfo.io/ip
-- 🚀 One-step installation
-- 📝 Detailed logging for tracking update activities
-- 🛡️ Safe updates with proper cleanup of old files
-- ⚙️ Special handling for version-specific updates (e.g., V15 wallet handling)
+# Installation
+- Download the script:
 
-## Quick Installation
-Set up the entire system with just one command:
+```bash
+curl -s https://raw.githubusercontent.com/WINGFO-HQ/PWR/main/auto_update_pwr_validator.sh > $HOME/auto_update_pwr_validator.sh
+```
+
+- Make it executable:
+```bash chmod +x $HOME/auto_update_pwr_validator.sh```
+
+# Usage Options
+Basic Usage
+- Run the script once to check for and apply updates:
+```bash
+./auto_update_pwr_validator.sh
+```
+
+# Watch Mode
+Run the script in watch mode to continuously check for updates until a new version is available:
+```bash
+./auto_update_pwr_validator.sh --watch
+```
+```This is useful when you want to ensure your validator gets updated as soon as a new version is released.```
+
+# Custom Check Interval
+- Set a custom interval (in seconds) for checking updates in watch mode:
+```bash
+./auto_update_pwr_validator.sh --watch --interval 300
+```
+The example above will check every 5 minutes.
+
+# Automated Hourly Checks
+Set up hourly automatic update checks via crontab:
+```bash
+crontab -e
+```
+- Add this line to check every hour: ```0 * * * * $HOME/auto_update_pwr_validator.sh```
+
+
+# Set up everything with just one command:
+One-Command Installation with Hourly Checks
 ```bash
 curl -s https://raw.githubusercontent.com/WINGFO-HQ/PWR/main/auto_update_pwr_validator.sh > $HOME/auto_update_pwr_validator.sh && chmod +x $HOME/auto_update_pwr_validator.sh && (crontab -l 2>/dev/null; echo "0 * * * * $HOME/auto_update_pwr_validator.sh") | crontab -
 ```
 
-# This command will:
-- Download the script to your home directory
-- Make it executable
-- Add it to your crontab to run every hour (at minute 0)
-
-# Manual Installation
-If you prefer to install manually:
-- Clone this repository:
-```bash 
-git clone https://github.com/WINGFO-HQ/PWR.git && cd PWR
-```
-
-- Make the script executable:
-```bash
-chmod +x auto_update_pwr_validator.sh
-```
-
-- Test it manually:
-```bash 
-./auto_update_pwr_validator.sh
-```
-
-- Set up hourly automatic updates:
-```bash 
-crontab -e
-```
-Add the line:
-```0 * * * * /full/path/to/auto_update_pwr_validator.sh```
-
 # Configuration
-The script has default settings that you can customize by editing the script:
+To adjust the script configuration, edit these variables at the top of the script:
 ```bash
 # Configuration
 GITHUB_REPO="pwrlabs/PWR-Validator"
-CONFIG_DIR="$HOME/pwr_validator"   #Directory for validator files
-VALIDATOR_PASSWORD="your_password" #Your validator password
-NODE_IP=$(curl -s ipinfo.io/ip)    #Auto-detects your IP address
+CONFIG_DIR="$HOME/pwr_validator"  # Directory for validator files
+VALIDATOR_PASSWORD="123456789"    # Validator password
+NODE_IP=$(curl -s ipinfo.io/ip)   # Auto-detects your IP address
 ```
+- You can change the password by modifying the VALIDATOR_PASSWORD variable.
 
 # Monitoring
-- You can check the update logs at any time:
+- Monitor update logs:
 ```bash
 cat ~/pwr_validator/auto_update.log
 ```
-- And monitor your validator:
+- Check validator status:
 ```bash
-bashtail -n 1000 ~/pwr_validator/nohup.out -f
+tail -n 1000 ~/pwr_validator/nohup.out -f
 ```
 
 # Manual Update Process
 If you prefer to update manually, you can follow these steps:
-
 - Stop the old validator:
 ```bash
 sudo pkill java && \
@@ -107,3 +114,8 @@ nohup sudo java -jar validator.jar --ip $(curl -s ipinfo.io/ip) --password passw
 ```bash
 tail -n 1000 nohup.out -f
 ```
+
+# Disclaimer
+This is an unofficial community tool. Use at your own risk.
+# Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
