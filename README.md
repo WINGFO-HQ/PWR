@@ -71,7 +71,7 @@ If you prefer to update manually, you can follow these steps:
 
 - Stop the old validator:
 ```bash
-sudo pkill java
+sudo pkill java && \
 sudo pkill -9 java
 ```
 
@@ -100,7 +100,7 @@ echo "123456789" > password
 
 - Run the validator:
 ```bash
-nohup sudo java -jar validator.jar --ip your_ip --password password &
+nohup sudo java -jar validator.jar --ip $(curl -s ipinfo.io/ip) --password password &
 ```
 
 - Check logs:
