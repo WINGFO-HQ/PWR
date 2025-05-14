@@ -44,7 +44,7 @@ chmod +x auto_update_pwr_validator.sh
 crontab -e
 ```
 Add the line:
-```bash 0 * * * * /full/path/to/auto_update_pwr_validator.sh```
+```0 * * * * /full/path/to/auto_update_pwr_validator.sh```
 
 # Configuration
 The script has default settings that you can customize by editing the script:
