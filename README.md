@@ -12,11 +12,8 @@ This repository contains an advanced auto-update script for PWR Validator nodes.
 - Download the script:
 
 ```bash
-curl -s https://raw.githubusercontent.com/WINGFO-HQ/PWR/main/auto_update_pwr_validator.sh > $HOME/auto_update_pwr_validator.sh
+curl -s https://raw.githubusercontent.com/WINGFO-HQ/PWR/main/auto_update_pwr_validator.sh && chmod +x $HOME/auto_update_pwr_validator.sh
 ```
-
-- Make it executable:
-```bash chmod +x $HOME/auto_update_pwr_validator.sh```
 
 # Usage Options
 Basic Usage
