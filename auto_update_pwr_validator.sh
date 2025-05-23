@@ -4,7 +4,7 @@
 GITHUB_REPO="pwrlabs/PWR-Validator"
 CONFIG_DIR="$HOME/pwr_validator"  # Default directory, can be adjusted as needed
 VALIDATOR_PASSWORD="123456789"    # Fixed validator password
-NODE_IP=$(curl -s ipinfo.io/ip)   # Auto-detect IP address
+NODE_IP=NODE_IP=$(curl -s ipinfo.io/ip)   # Auto-detect IP address
 
 # Log file setup
 LOG_FILE="${CONFIG_DIR}/auto_update.log"
@@ -67,7 +67,7 @@ perform_update() {
     
     # Remove old files
     log "Removing old files..."
-    sudo rm -rf validator.jar config.json nohup.out rocksdb blocks merkleTree rpcdata
+    sudo rm -rf validator.jar config.json nohup.out
     
     # If first V15 update, also delete wallet
     if [[ "$CURRENT_VERSION" == "none" || "$CURRENT_VERSION" < "15.0.0" ]]; then
@@ -134,7 +134,7 @@ watch_for_updates() {
 
 # Parse command line options
 WATCH_MODE=false
-CHECK_INTERVAL=3600  # Default check interval: 1 hour in seconds
+CHECK_INTERVAL=300  # Default check interval: 1 hour in seconds
 
 while [[ $# -gt 0 ]]; do
     case $1 in
