@@ -134,7 +134,7 @@ watch_for_updates() {
 
 # Parse command line options
 WATCH_MODE=false
-CHECK_INTERVAL=300  # Default check interval: 1 hour in seconds
+CHECK_INTERVAL=900  # Default check interval: 1 hour in seconds
 
 while [[ $# -gt 0 ]]; do
     case $1 in
